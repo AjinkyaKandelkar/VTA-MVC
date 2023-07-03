@@ -1,0 +1,109 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IEnumerable<UserVehicalDto>
+
+<style>
+    td{
+        
+        padding:10px;
+    }
+</style>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <div>
+        
+    </div>
+</div>
+
+<div class="mt-2 d-flex justify-content-between">
+    <div class="fs-5 fw-bold">
+        Vehicals Own
+    </div>
+    <div>
+        <button type="button" class="btn btn-dark "> @Html.ActionLink("+ Add Vehical", "AddVehical", "Home")   </button>
+    </div>
+</div>
+<hr>
+<div class=" container">
+    <div class="row">
+            @foreach(var vehical in Model)
+            {
+                <div class="col-md-3 mb-3">
+                <div class="card">
+                    <div class="card-header text-end">
+                        <button class="btn "> <i class="bi bi-trash-fill text-danger fs-5"></i> </button>
+                    </div>
+                    <div class="card-body">
+                        <table>
+                            <tr>
+                                <th>
+                                    Organization Name
+                                </th>
+                                <td>
+                                    @vehical.Organisationname
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Make Of Vehical
+                                </th>
+                                <td>
+                                    @vehical.Makeofvehicle
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    vehical Number
+                                </th>
+                                <td>
+                                    @vehical.VehicleNumber
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Engin Number
+                                </th>
+                                <td>
+                                    @vehical.EngineNumber
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Chassis Number
+                                </th>
+                                <td>
+                                    @vehical.ChassisNumber
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Manifacturing Year
+                                </th>
+                                <td>
+                                    @vehical.Manufacturingyear
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Load Carying Capacity
+                                </th>
+                                <td>
+                                    @vehical.Loadcarryingcapacity
+                                </td>
+                            </tr>
+                        </table>
+                        
+                        
+                        
+                    </div>
+                </div>
+                </div>
+
+            }
+    </div>
+</div>
+
+

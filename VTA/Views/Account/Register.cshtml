@@ -1,0 +1,69 @@
+﻿
+@model UserDto
+<style>
+    .btn {
+        padding: 0.375rem 5.75rem;
+    }
+</style>
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-4 mt-5">
+            <div class="card">
+                <div class="card-header text-center fs-4 fw-bold">
+                    Register
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="Account" asp-action="Register">
+                <label class="form-label">
+
+                </label>
+                <label class="form-label">
+                        Name
+
+                </label>
+                        <input type="text" class="form-control" asp-for="Name" id="Name" name="Name" />
+                <label class="form-label">
+
+                        Email: 
+                </label>
+                   <input type="text" class="form-control"  asp-for="EmailAddress" id="EmailAddress" name="EmailAddress" />
+                <label class="form-label">
+
+                        Password 
+                </label>
+                    <input type="text" class="form-control" asp-for="password" id="password" name="password" />
+                <label class="form-label">
+
+                    Phone
+                    
+                </label>
+               <input type="text" class="form-control" asp-for="MobileNumber" id="MobileNumber" name="MobileNumber" />
+
+                <label class="form-label">
+
+                    Location: 
+                </label>
+                    
+                    <input type="text" class="form-control" asp-for="Localtion" id="Localtion" name="Localtion" />
+                   
+                <div class="mt-3 text-center" >
+
+                    <input class="btn btn-primary" type="submit" value="SignUp" />
+
+                            <div class="mt-3"> Already User? <a asp-action="Login"> Login </a> </div>
+
+                </div>        
+                    
+               
+            </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+ 
