@@ -31,7 +31,8 @@ namespace VTA.Controllers
 
             }
             else
-                return RedirectToAction("Index","Home", user);
+                StorageBag.currentLoginId = user.Id;
+                return RedirectToAction("Index","Home",new { @userid = user.Id });
             
 		}
 		// GET: RegisterController

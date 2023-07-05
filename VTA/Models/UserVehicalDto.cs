@@ -13,6 +13,6 @@
         public int Bodytype { get; set; }
         public string Organisationname { get; set; }
         public int? UserID { get; set; }
-        public string DeviceId { get; set; }
+        public int DeviceId { get; set; }
     }
 }

@@ -9,14 +9,14 @@ namespace VTA.Services
         HttpResponseMessage response = new HttpResponseMessage();
         string baseUrl = "https://localhost:7036/api";
 
-        public async Task<IEnumerable<UserVehicalDto>> GetVehicals(int? id)
+        public async Task<List<UserVehicalDto>> GetVehicals(int? id)
         {
             using (var client = new HttpClient())
             {
 
                 client.BaseAddress = new Uri(baseUrl);
 
-                response = client.GetAsync($"api/Vehical/Get/{id}").Result;
+                response = await client.GetAsync($"api/Vehical/GetVehicalsByUserId?userId={id}");
                 if (response.IsSuccessStatusCode)
                 {
                     var abc = await response.Content.ReadFromJsonAsync<List<UserVehicalDto>>();
@@ -26,17 +26,44 @@ namespace VTA.Services
                     return null;
             }
         }
-        public bool AddVehical(UserVehicalDto vehical)
+        public async Task DeleteVehicals(int? id)
         {
             using (var client = new HttpClient())
             {
 
-                vehical.UserID = StorageBag.currentLoginId;
-                vehical.DeviceId = "1";
+                client.BaseAddress = new Uri(baseUrl);
+                response = await client.DeleteAsync($"api/Vehical/DeleteVehical/{id}");
+                
+            }
+        }
+        public async Task<UserDto> GetUserDetail(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(baseUrl);
+
+                response = await client.GetAsync($"api/User/GetUserById/{id}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var abc = await response.Content.ReadFromJsonAsync<UserDto>();
+                    return abc;
+                }
+                else
+                    return null;
+
+            }
+        }
+
+            public async Task <bool> AddVehical(UserVehicalDto vehical)
+        {
+            using (var client = new HttpClient())
+            {
+
+                vehical.DeviceId = 2;
 
                 client.BaseAddress = new Uri(baseUrl);
                 var payload = JsonConvert.SerializeObject(vehical);
-                response = client.PostAsJsonAsync("api/Vehical/Post",vehical).Result;
+                response = await client.PostAsJsonAsync("api/Vehical/CreateVehical", vehical);
                 
             }
             return response.IsSuccessStatusCode;

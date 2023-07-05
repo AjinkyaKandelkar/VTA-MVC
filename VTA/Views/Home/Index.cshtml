@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-@model IEnumerable<UserVehicalDto>
+@model UserAndVehicals
 
 <style>
     td{
@@ -12,7 +12,7 @@
 </style>
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Welcome @Model.User.Name </h1>
     <div>
         
     </div>
@@ -29,12 +29,15 @@
 <hr>
 <div class=" container">
     <div class="row">
-            @foreach(var vehical in Model)
+        @if(Model.Vehical.Count !=0)
+        {
+            
+        foreach(var vehical in Model.Vehical)
             {
                 <div class="col-md-3 mb-3">
                 <div class="card">
                     <div class="card-header text-end">
-                        <button class="btn "> <i class="bi bi-trash-fill text-danger fs-5"></i> </button>
+                            <button class="btn " asp-action="DeleteVehical" asp-route-id="1"> <i class="bi bi-trash-fill text-danger fs-5"></i> </button>
                     </div>
                     <div class="card-body">
                         <table>
@@ -103,7 +106,31 @@
                 </div>
 
             }
+        }
+        else
+        {
+            <h3> No Vehicals Registerd!! </h3>
+        }
     </div>
 </div>
 
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+    function delete(id){
+        /*var id = 123;*/ // Replace with the actual ID value you want to pass
+        $.ajax({
+                url: '/HomeController/DeleteVehical/'+id,
+          type: 'Delete',
+         
+          success: function(result) {
+            // Handle the success response
+          },
+          error: function(xhr, status, error) {
+            // Handle the error response
+          }
+        });
+      });
+    });
+</script>
