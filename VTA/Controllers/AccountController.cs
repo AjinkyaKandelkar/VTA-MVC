@@ -39,10 +39,15 @@ namespace VTA.Controllers
 		public async Task<ActionResult> Register(UserDto user)
         {
 
-            //user.photopath = "sds";
-            _accountService.Registration(user);
-            
-            return View();
+            var userid = await _accountService.Registration(user);
+            if (userid==null)
+            {
+
+                return View();
+            }
+            else
+                StorageBag.currentLoginId = userid;
+                return RedirectToAction("Index", "Home", new { @userid = userid });
         }
 
         // GET: RegisterController/Details/5

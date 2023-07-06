@@ -12,18 +12,24 @@ namespace VTA.Services
     {
         HttpResponseMessage response = new HttpResponseMessage();
         string baseUrl = "https://localhost:7036/api";
-        public async Task<bool> Registration(UserDto user)
+        public async Task<int?> Registration(UserDto user)
         {
             using (var client = new HttpClient())
             {
-
+                user.photopath = "something";
                 client.BaseAddress = new Uri(baseUrl);
                 var payload = JsonConvert.SerializeObject(user);
-                 response = await client.PostAsJsonAsync("api/User/CreateUser", user);
+               
+                response = await client.PostAsJsonAsync("api/User/CreateUser",user);
                
             }
+            if (response.IsSuccessStatusCode)
+            {
 
-            return response.IsSuccessStatusCode;
+                return await response.Content.ReadFromJsonAsync<int>();
+            }
+            else
+                return null;
         }
 
 
